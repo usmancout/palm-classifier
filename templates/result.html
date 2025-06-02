@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- In both index.html and result.html -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Palm Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>>
+<body>
+    <div class="container">
+        <header>
+            <h1>Palm Classification Result</h1>
+        </header>
+        
+        <div class="result-container">
+            <div class="image-preview">
+                <img src="{{ url_for('static', filename='uploads/' + image_path.split('/')[-1]) }}" alt="Uploaded Palm Image">
+            </div>
+            
+            <div class="result-details">
+                <h2>Analysis Result</h2>
+                
+                <div class="result-item">
+                    <span class="result-label">Predicted Category:</span>
+                    <span class="result-value">{{ predicted_class }}</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Confidence Level:</span>
+                    <span class="result-value">{{ confidence }}%</span>
+                </div>
+                
+                <div class="confidence-meter">
+                    <div class="meter-bar" style="width: {{ confidence }}%;"></div>
+                </div>
+                
+                <a href="{{ url_for('index') }}" class="back-btn">Analyze Another Palm</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Palm Classifier App | Professional Classification System</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Palm Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Palm Classifier</h1>
+            <p>Upload an image of a palm to identify the category</p>
+        </header>
+        
+        <div class="upload-container">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" name="file" id="fileInput" accept="image/*" required>
+                    <label for="fileInput" class="upload-label">
+                        <img src="https://images.unsplash.com/photo-1713751785108-1b2acbe7e8c0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Upload Icon" class="upload-icon">
+                        <p>Drag & drop your palm image here or click to browse</p>
+                        <span class="file-requirements">Supports: JPG, JPEG, PNG</span>
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn">Analyze Palm</button>
+            </form>
+        </div>
+        
+        <footer>
+            <p>© 2025 Palm Classifier App | Professional Classification System</p>
+        </footer>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            fileInput.files = e.dataTransfer.files;
+            
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                document.querySelector('.upload-label p').textContent = fileName;
+            }
+        });
+        
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                document.querySelector('.upload-label p').textContent = fileName;
+            }
+        });
+    </script>
+</body>
+</html>
